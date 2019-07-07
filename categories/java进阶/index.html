@@ -98,25 +98,20 @@
 
 
 
-  <meta name="description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
-<meta name="keywords" content="Java进阶">
-<meta property="og:type" content="article">
-<meta property="og:title" content="定时任务调度之Timer">
-<meta property="og:url" content="http://yoursite.com/2019/06/05/Timer/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Q&#39;s Blog">
+<meta property="og:url" content="http://yoursite.com/categories/java进阶/index.html">
 <meta property="og:site_name" content="Q&#39;s Blog">
-<meta property="og:description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-05T08:35:39.629Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="定时任务调度之Timer">
-<meta name="twitter:description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
+<meta name="twitter:title" content="Q&#39;s Blog">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/05/Timer/">
+  <link rel="canonical" href="http://yoursite.com/categories/java进阶/">
 
 
 
@@ -126,7 +121,7 @@
   };
 </script>
 
-  <title>定时任务调度之Timer | Q's Blog</title>
+  <title>分类: java进阶 | Q's Blog</title>
   
 
 
@@ -174,7 +169,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -246,7 +241,7 @@
         
         
           
-          <li class="menu-item menu-item-categories">
+          <li class="menu-item menu-item-categories menu-item-active">
 
     
     
@@ -302,6 +297,28 @@
   
     
 
+    
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
   
 
   
@@ -326,248 +343,57 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block category">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>java进阶<small>分类</small>
+        </h1>
+      </div>
 
-  
-  
-  
-
-  
+      
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/05/Timer/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="张政淇">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="https://hexo-1253808912.cos.ap-beijing.myqcloud.com/%E5%A4%B4%E5%83%8F.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Q's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+          <a class="post-title-link" href="/2019/07/07/hashmap源码分析/" itemprop="url">
+            
+              <span itemprop="name">HashMap源码分析</span>
+            
+          </a>
         
-          <h1 class="post-title" itemprop="name headline">定时任务调度之Timer
+      </h2>
 
-              
-            
-          </h1>
-        
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-07-07T13:25:15+08:00" content="2019-07-07">
+          07-07
+        </time>
+      </div>
 
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-05 16:27:56 / 修改时间：16:35:39" itemprop="dateCreated datePublished" datetime="2019-06-05T16:27:56+08:00">2019-06-05</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架工具/" itemprop="url" rel="index"><span itemprop="name">框架工具</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/06/05/Timer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/05/Timer/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-            <span id="/2019/06/05/Timer/" class="leancloud_visitors" data-flag-title="定时任务调度之Timer">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。</p>
-<a id="more"></a>
-<ul>
-<li><p>通过继承TimerTask重写run方法实现具体要做的事</p>
-</li>
-<li><p>Timer.schedule(TimerTask task, Date firstTime, long period)使用TaskQueue来调度TimerTask</p>
-</li>
-<li><p>Timer中有一个TimerThread任务调度线程，此线程在run方法中调用mainLoop方法在一个while循环中处理TaskQueue数组中的TimerTask</p>
-</li>
-</ul>
-<hr>
-<p><strong>scheduleAtFixedRate和schedule方法有何不同？</strong></p>
-<ol>
-<li><p>schedule(TimerTask task, Date time)、schedule(TimerTask task, long delay)<br>对于这两个方法而言，如果指定的计划执行时间 scheduledExecutionTime&lt;= systemCurrentTime，则 task 会被立即执行。scheduledExecutionTime 不会因为某一个 task 的过度执行而改变。</p>
-</li>
-<li><p>schedule(TimerTask task, Date firstTime, long period)、schedule(TimerTask task, long delay, long period)<br>这两个方法与上面两个就有点儿不同的，前面提过 Timer 的计时器任务会因为前一个任务执行时间较长而延时。在这两个方法中，每一次执行的 task 的计划时间会随着前一个 task 的实际时间而发生改变，也就是 scheduledExecutionTime(n+1)=realExecutionTime(n)+periodTime。也就是说如果第 n 个 task 由于某种情况导致这次的执行时间过程，最后导致 systemCurrentTime&gt;= scheduledExecutionTime(n+1)，这是第 n+1 个 task 并不会因为到时了而执行，他会等待第 n 个 task 执行完之后再执行，那么这样势必会导致 n+2 个的执行实现 scheduledExecutionTime 放生改变即 scheduledExecutionTime(n+2) = realExecutionTime(n+1)+periodTime。所以这两个方法更加注重保存间隔时间的稳定。</p>
-</li>
-<li><p>scheduleAtFixedRate(TimerTask task, Date firstTime, long period)、scheduleAtFixedRate(TimerTask task, long delay, long period)<br>在前面也提过 scheduleAtFixedRate 与 schedule 方法的侧重点不同，schedule 方法侧重保存间隔时间的稳定，而 scheduleAtFixedRate 方法更加侧重于保持执行频率的稳定。为什么这么说，原因如下。在 schedule 方法中会因为前一个任务的延迟而导致其后面的定时任务延时，而 scheduleAtFixedRate 方法则不会，如果第 n 个 task 执行时间过长导致 systemCurrentTime&gt;= scheduledExecutionTime(n+1)，则不会做任何等待他会立即执行第 n+1 个 task，所以 scheduleAtFixedRate 方法执行时间的计算方法不同于 schedule，而是 scheduledExecutionTime(n)=firstExecuteTime +n*periodTime，该计算方法永远保持不变。所以 scheduleAtFixedRate 更加侧重于保持执行频率的稳定。</p>
-</li>
-</ol>
-<hr>
-<p><strong>Timer怎么做到在未来的指定时刻运行任务的？</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void mainLoop() &#123;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                TimerTask task;</span><br><span class="line">                boolean taskFired;</span><br><span class="line">                synchronized(queue) &#123;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (!taskFired) // Task hasn&apos;t yet fired; wait</span><br><span class="line">                        queue.wait(executionTime - currentTime);</span><br></pre></td></tr></table></figure>
-<p>Timer持有TaskQueue的锁，算好未来某时刻距离现在的时间跨度，调用锁的native方法wait，等到这段时间跨度耗尽，wait返回，开始执行之前所定义的定时任务。</p>
-
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Java进阶/" rel="tag"># Java进阶</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/03/Flink应用场景/" rel="next" title="Flink应用场景">
-                <i class="fa fa-chevron-left"></i> Flink应用场景
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/18/2019.6.11实战调优-用户最近一次活跃时间/" rel="prev" title="实战调优-用户最近活跃时间">
-                实战调优-用户最近活跃时间 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
+      
+    </div>
+
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-
-  
-
-
 
         </div>
         
@@ -892,10 +718,6 @@
 
 
   
-  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/js/src/post-details.js?v=7.0.1"></script>
-
-
 
   
 
@@ -942,8 +764,6 @@
 
 
 
-  
-
 
   
 
@@ -954,37 +774,38 @@
   
   <script>
     
-    function addCount(Counter) {
+    function showTime(Counter) {
+      var entries = [];
       var $visitors = $('.leancloud_visitors');
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
 
-      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+      $visitors.each(function() {
+        entries.push( $(this).attr('id').trim() );
+      });
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url: { '$in': entries } }) })
         .done(function({ results }) {
-          if (results.length > 0) {
-            var counter = results[0];
-            
-            Counter('put', '/classes/Counter/' + counter.objectId, JSON.stringify({ time: { '__op': 'Increment', 'amount': 1 } }))
-            
-              .done(function() {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.time + 1);
-              })
-            
-              .fail(function ({ responseJSON }) {
-                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
-              })
-          } else {
-            
-              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1 }))
-                .done(function() {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(1);
-                })
-                .fail(function() {
-                  console.log('Failed to create');
-                });
-            
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.url;
+            var time = item.time;
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for (var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if (countSpan.text() == '') {
+              countSpan.text(0);
+            }
           }
         })
         .fail(function ({ responseJSON }) {
@@ -1009,7 +830,9 @@
             });
           };
           
-            addCount(Counter);
+            if ($('.post-title-link').length >= 1) {
+              showTime(Counter);
+            }
           
         });
     });

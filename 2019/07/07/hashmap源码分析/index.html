@@ -98,25 +98,25 @@
 
 
 
-  <meta name="description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
-<meta name="keywords" content="Java进阶">
+  <meta name="description" content="先看hashmap常用方法put和get。 put123public V put(K key, V value) &amp;#123;        return putVal(hash(key), key, value, false, true);    &amp;#125; 可以看出put实际上调用了putVal函数，我们接着看这个方法">
+<meta name="keywords" content="源码阅读">
 <meta property="og:type" content="article">
-<meta property="og:title" content="定时任务调度之Timer">
-<meta property="og:url" content="http://yoursite.com/2019/06/05/Timer/index.html">
+<meta property="og:title" content="HashMap源码分析">
+<meta property="og:url" content="http://yoursite.com/2019/07/07/hashmap源码分析/index.html">
 <meta property="og:site_name" content="Q&#39;s Blog">
-<meta property="og:description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
+<meta property="og:description" content="先看hashmap常用方法put和get。 put123public V put(K key, V value) &amp;#123;        return putVal(hash(key), key, value, false, true);    &amp;#125; 可以看出put实际上调用了putVal函数，我们接着看这个方法">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-05T08:35:39.629Z">
+<meta property="og:updated_time" content="2019-07-07T05:27:12.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="定时任务调度之Timer">
-<meta name="twitter:description" content="在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。">
+<meta name="twitter:title" content="HashMap源码分析">
+<meta name="twitter:description" content="先看hashmap常用方法put和get。 put123public V put(K key, V value) &amp;#123;        return putVal(hash(key), key, value, false, true);    &amp;#125; 可以看出put实际上调用了putVal函数，我们接着看这个方法">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/05/Timer/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/07/hashmap源码分析/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>定时任务调度之Timer | Q's Blog</title>
+  <title>HashMap源码分析 | Q's Blog</title>
   
 
 
@@ -342,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/05/Timer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/hashmap源码分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张政淇">
@@ -359,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">定时任务调度之Timer
+          <h1 class="post-title" itemprop="name headline">HashMap源码分析
 
               
             
@@ -385,7 +385,7 @@
                 
               
 
-              <time title="创建时间：2019-06-05 16:27:56 / 修改时间：16:35:39" itemprop="dateCreated datePublished" datetime="2019-06-05T16:27:56+08:00">2019-06-05</time>
+              <time title="创建时间：2019-07-07 13:25:15 / 修改时间：13:27:12" itemprop="dateCreated datePublished" datetime="2019-07-07T13:25:15+08:00">2019-07-07</time>
             
 
             
@@ -407,7 +407,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/框架工具/" itemprop="url" rel="index"><span itemprop="name">框架工具</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java进阶/" itemprop="url" rel="index"><span itemprop="name">java进阶</span></a></span>
 
                 
                 
@@ -426,8 +426,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/06/05/Timer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/05/Timer/" itemprop="commentCount"></span>
+                <a href="/2019/07/07/hashmap源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/07/hashmap源码分析/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -435,7 +435,7 @@
 
           
           
-            <span id="/2019/06/05/Timer/" class="leancloud_visitors" data-flag-title="定时任务调度之Timer">
+            <span id="/2019/07/07/hashmap源码分析/" class="leancloud_visitors" data-flag-title="HashMap源码分析">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -466,31 +466,11 @@
       
 
       
-        <p>在企业实践中，经常会有自动化运维的需求，定时触发某种任务，例如数据库同步、备份，凌晨统计结算，如果在运维端，可以编写shell脚本来实现，unix系统提供了crontab命令来定义定时任务。在业务层面，需要编写代码来完成这件事。当前最火的定时调度工具当属spring的quartz，这里先分析一下他的老大哥Java jdk自带的Timer定时调度器，来初探定时这一功能的简单实现。</p>
-<a id="more"></a>
-<ul>
-<li><p>通过继承TimerTask重写run方法实现具体要做的事</p>
-</li>
-<li><p>Timer.schedule(TimerTask task, Date firstTime, long period)使用TaskQueue来调度TimerTask</p>
-</li>
-<li><p>Timer中有一个TimerThread任务调度线程，此线程在run方法中调用mainLoop方法在一个while循环中处理TaskQueue数组中的TimerTask</p>
-</li>
-</ul>
-<hr>
-<p><strong>scheduleAtFixedRate和schedule方法有何不同？</strong></p>
-<ol>
-<li><p>schedule(TimerTask task, Date time)、schedule(TimerTask task, long delay)<br>对于这两个方法而言，如果指定的计划执行时间 scheduledExecutionTime&lt;= systemCurrentTime，则 task 会被立即执行。scheduledExecutionTime 不会因为某一个 task 的过度执行而改变。</p>
-</li>
-<li><p>schedule(TimerTask task, Date firstTime, long period)、schedule(TimerTask task, long delay, long period)<br>这两个方法与上面两个就有点儿不同的，前面提过 Timer 的计时器任务会因为前一个任务执行时间较长而延时。在这两个方法中，每一次执行的 task 的计划时间会随着前一个 task 的实际时间而发生改变，也就是 scheduledExecutionTime(n+1)=realExecutionTime(n)+periodTime。也就是说如果第 n 个 task 由于某种情况导致这次的执行时间过程，最后导致 systemCurrentTime&gt;= scheduledExecutionTime(n+1)，这是第 n+1 个 task 并不会因为到时了而执行，他会等待第 n 个 task 执行完之后再执行，那么这样势必会导致 n+2 个的执行实现 scheduledExecutionTime 放生改变即 scheduledExecutionTime(n+2) = realExecutionTime(n+1)+periodTime。所以这两个方法更加注重保存间隔时间的稳定。</p>
-</li>
-<li><p>scheduleAtFixedRate(TimerTask task, Date firstTime, long period)、scheduleAtFixedRate(TimerTask task, long delay, long period)<br>在前面也提过 scheduleAtFixedRate 与 schedule 方法的侧重点不同，schedule 方法侧重保存间隔时间的稳定，而 scheduleAtFixedRate 方法更加侧重于保持执行频率的稳定。为什么这么说，原因如下。在 schedule 方法中会因为前一个任务的延迟而导致其后面的定时任务延时，而 scheduleAtFixedRate 方法则不会，如果第 n 个 task 执行时间过长导致 systemCurrentTime&gt;= scheduledExecutionTime(n+1)，则不会做任何等待他会立即执行第 n+1 个 task，所以 scheduleAtFixedRate 方法执行时间的计算方法不同于 schedule，而是 scheduledExecutionTime(n)=firstExecuteTime +n*periodTime，该计算方法永远保持不变。所以 scheduleAtFixedRate 更加侧重于保持执行频率的稳定。</p>
-</li>
-</ol>
-<hr>
-<p><strong>Timer怎么做到在未来的指定时刻运行任务的？</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">private void mainLoop() &#123;</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                TimerTask task;</span><br><span class="line">                boolean taskFired;</span><br><span class="line">                synchronized(queue) &#123;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (!taskFired) // Task hasn&apos;t yet fired; wait</span><br><span class="line">                        queue.wait(executionTime - currentTime);</span><br></pre></td></tr></table></figure>
-<p>Timer持有TaskQueue的锁，算好未来某时刻距离现在的时间跨度，调用锁的native方法wait，等到这段时间跨度耗尽，wait返回，开始执行之前所定义的定时任务。</p>
+        <p>先看hashmap常用方法put和get。</p>
+<h1 id="put"><a href="#put" class="headerlink" title="put"></a>put</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出put实际上调用了putVal函数，我们接着看这个方法<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</span><br><span class="line">                   boolean evict) &#123;</span><br><span class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</span><br><span class="line">        //如果table为空或者null，先进行hashmap中table的初始化</span><br><span class="line">        if ((tab = table) == null || (n = tab.length) == 0)</span><br><span class="line">            n = (tab = resize()).length;</span><br><span class="line">        //注意这里散列运算为(n-1)&amp;hash，求出将要放置新Node的位置编号</span><br><span class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</span><br><span class="line">            tab[i] = newNode(hash, key, value, null);</span><br><span class="line">        //如果散列地址已有Node，那么在此Node后面链接上，到达TREEIFY_THRESHOLD的话就转化成红黑树    </span><br><span class="line">        else &#123;</span><br><span class="line">            Node&lt;K,V&gt; e; K k;</span><br><span class="line">            if (p.hash == hash &amp;&amp;</span><br><span class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                e = p;</span><br><span class="line">            //已经在之前转化为了红黑树，则调用putTreeVal来进行红黑树的节点添加</span><br><span class="line">            else if (p instanceof TreeNode)</span><br><span class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</span><br><span class="line">            else &#123;</span><br><span class="line">                for (int binCount = 0; ; ++binCount) &#123;</span><br><span class="line">                    if ((e = p.next) == null) &#123;</span><br><span class="line">                        p.next = newNode(hash, key, value, null);</span><br><span class="line">                        //超过设定阈值，链表转化为红黑树</span><br><span class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</span><br><span class="line">                            treeifyBin(tab, hash);</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line">                    if (e.hash == hash &amp;&amp;</span><br><span class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                        break;</span><br><span class="line">                    p = e;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            //如果已经存在这个key，则更新其value</span><br><span class="line">            if (e != null) &#123; // existing mapping for key</span><br><span class="line">                V oldValue = e.value;</span><br><span class="line">                if (!onlyIfAbsent || oldValue == null)</span><br><span class="line">                    e.value = value;</span><br><span class="line">                afterNodeAccess(e);</span><br><span class="line">                return oldValue;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ++modCount;</span><br><span class="line">        //添加完节点后，如果超过设定阈值，则扩容，</span><br><span class="line">        if (++size &gt; threshold)</span><br><span class="line">            resize();</span><br><span class="line">        afterNodeInsertion(evict);</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="get"><a href="#get" class="headerlink" title="get"></a>get</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public V get(Object key) &#123;</span><br><span class="line">        Node&lt;K,V&gt; e;</span><br><span class="line">        return (e = getNode(hash(key), key)) == null ? null : e.value;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这里是先算出传入key的hash，将其作为参数再调用getNode方法，下面看看getNode方法是怎么判断key是否重复，或者怎么才能放入一个新的entry。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Implements Map.get and related methods.</span><br><span class="line"> *</span><br><span class="line"> * @param hash hash for key</span><br><span class="line"> * @param key the key</span><br><span class="line"> * @return the node, or null if none</span><br><span class="line"> */</span><br><span class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</span><br><span class="line">    Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</span><br><span class="line">    //hashmap通过先检验hash值是否相等，如果不等再检查equal方法是否相等来确定一个Node是否应该放入</span><br><span class="line">    if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</span><br><span class="line">        (first = tab[(n - 1) &amp; hash]) != null) &#123;</span><br><span class="line">        //先判断第一个Node的key是否和传入的key一致，再判断后续的是否是要取的Node</span><br><span class="line">        if (first.hash == hash &amp;&amp; // always check first node</span><br><span class="line">            ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">            return first;</span><br><span class="line">        if ((e = first.next) != null) &#123;</span><br><span class="line">            if (first instanceof TreeNode)</span><br><span class="line">            //如果Node已经转化为红黑树，则调用红黑树的方法来取value</span><br><span class="line">                return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</span><br><span class="line">            do &#123;</span><br><span class="line">                if (e.hash == hash &amp;&amp;</span><br><span class="line">                    ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</span><br><span class="line">                    return e;</span><br><span class="line">            &#125; while ((e = e.next) != null);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -514,7 +494,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java进阶/" rel="tag"># Java进阶</a>
+            <a href="/tags/源码阅读/" rel="tag"># 源码阅读</a>
           
         </div>
       
@@ -527,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/03/Flink应用场景/" rel="next" title="Flink应用场景">
-                <i class="fa fa-chevron-left"></i> Flink应用场景
+              <a href="/2019/07/04/动态规划-最长上升子序列/" rel="next" title="动态规划-最长上升子序列">
+                <i class="fa fa-chevron-left"></i> 动态规划-最长上升子序列
               </a>
             
           </div>
@@ -536,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/18/2019.6.11实战调优-用户最近一次活跃时间/" rel="prev" title="实战调优-用户最近活跃时间">
-                实战调优-用户最近活跃时间 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -587,8 +563,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -737,6 +722,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#put"><span class="nav-number">1.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#get"><span class="nav-number">2.</span> <span class="nav-text">get</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
