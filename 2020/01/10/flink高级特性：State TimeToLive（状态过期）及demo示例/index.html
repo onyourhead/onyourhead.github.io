@@ -98,24 +98,25 @@
 
 
 
-  <meta name="description" content="以下文章非原创，仅做分享  作者：黑井千次 “看，有人给你送礼物来了。”走出房门来迎接他的妻子，在说“你回来啦”之前，突然对丈夫这么说。弯腰脱鞋的丈夫发现鞋箱上放着一盆花。 “噢，这花很漂亮。好像是洋兰。哪里来的？”">
+  <meta name="description" content="随着flink中的状态的持续增长，无论是哪种状态后端，都需要节省空间。类似于redis，flink也提供了对State的过期测策略和清理策略。我们可以设置过期时间，并且支持设置粒度细化到每个状态集合的实体，list中的每个元素和map中每个键值对都可以独立设置过期时间。伴随文章介绍的，还有本人编写的State从入么到高级应用的全部特性demo代码，地址如下：https://github.com/o">
+<meta name="keywords" content="高级">
 <meta property="og:type" content="article">
-<meta property="og:title" content="幸福的生日">
-<meta property="og:url" content="http://yoursite.com/2019/03/26/幸福的生日/index.html">
+<meta property="og:title" content="flink高级特性：State TimeToLive（状态过期）及demo示例">
+<meta property="og:url" content="http://yoursite.com/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/index.html">
 <meta property="og:site_name" content="Q&#39;s Blog">
-<meta property="og:description" content="以下文章非原创，仅做分享  作者：黑井千次 “看，有人给你送礼物来了。”走出房门来迎接他的妻子，在说“你回来啦”之前，突然对丈夫这么说。弯腰脱鞋的丈夫发现鞋箱上放着一盆花。 “噢，这花很漂亮。好像是洋兰。哪里来的？”">
+<meta property="og:description" content="随着flink中的状态的持续增长，无论是哪种状态后端，都需要节省空间。类似于redis，flink也提供了对State的过期测策略和清理策略。我们可以设置过期时间，并且支持设置粒度细化到每个状态集合的实体，list中的每个元素和map中每个键值对都可以独立设置过期时间。伴随文章介绍的，还有本人编写的State从入么到高级应用的全部特性demo代码，地址如下：https://github.com/o">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-26T07:52:39.363Z">
+<meta property="og:updated_time" content="2020-01-10T12:14:40.500Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="幸福的生日">
-<meta name="twitter:description" content="以下文章非原创，仅做分享  作者：黑井千次 “看，有人给你送礼物来了。”走出房门来迎接他的妻子，在说“你回来啦”之前，突然对丈夫这么说。弯腰脱鞋的丈夫发现鞋箱上放着一盆花。 “噢，这花很漂亮。好像是洋兰。哪里来的？”">
+<meta name="twitter:title" content="flink高级特性：State TimeToLive（状态过期）及demo示例">
+<meta name="twitter:description" content="随着flink中的状态的持续增长，无论是哪种状态后端，都需要节省空间。类似于redis，flink也提供了对State的过期测策略和清理策略。我们可以设置过期时间，并且支持设置粒度细化到每个状态集合的实体，list中的每个元素和map中每个键值对都可以独立设置过期时间。伴随文章介绍的，还有本人编写的State从入么到高级应用的全部特性demo代码，地址如下：https://github.com/o">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/26/幸福的生日/">
+  <link rel="canonical" href="http://yoursite.com/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/">
 
 
 
@@ -125,7 +126,7 @@
   };
 </script>
 
-  <title>幸福的生日 | Q's Blog</title>
+  <title>flink高级特性：State TimeToLive（状态过期）及demo示例 | Q's Blog</title>
   
 
 
@@ -341,7 +342,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/幸福的生日/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="张政淇">
@@ -358,7 +359,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">幸福的生日
+          <h1 class="post-title" itemprop="name headline">flink高级特性：State TimeToLive（状态过期）及demo示例
 
               
             
@@ -384,7 +385,7 @@
                 
               
 
-              <time title="创建时间：2019-03-26 15:50:55 / 修改时间：15:52:39" itemprop="dateCreated datePublished" datetime="2019-03-26T15:50:55+08:00">2019-03-26</time>
+              <time title="创建时间：2020-01-10 20:05:30 / 修改时间：20:14:40" itemprop="dateCreated datePublished" datetime="2020-01-10T20:05:30+08:00">2020-01-10</time>
             
 
             
@@ -406,7 +407,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/美文/" itemprop="url" rel="index"><span itemprop="name">美文</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/flink/" itemprop="url" rel="index"><span itemprop="name">flink</span></a></span>
 
                 
                 
@@ -425,8 +426,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/03/26/幸福的生日/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/26/幸福的生日/" itemprop="commentCount"></span>
+                <a href="/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -434,7 +435,7 @@
 
           
           
-            <span id="/2019/03/26/幸福的生日/" class="leancloud_visitors" data-flag-title="幸福的生日">
+            <span id="/2020/01/10/flink高级特性：State TimeToLive（状态过期）及demo示例/" class="leancloud_visitors" data-flag-title="flink高级特性：State TimeToLive（状态过期）及demo示例">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -465,31 +466,43 @@
       
 
       
-        <blockquote>
-<p>以下文章非原创，仅做分享</p>
-</blockquote>
-<p>作者：黑井千次</p>
-<p>“看，有人给你送礼物来了。”走出房门来迎接他的妻子，在说“你回来啦”之前，突然对丈夫这么说。弯腰脱鞋的丈夫发现鞋箱上放着一盆花。</p>
-<p>“噢，这花很漂亮。好像是洋兰。哪里来的？”<br><a id="more"></a><br>丈夫回答道，心里却突然涌起一种不祥之感。</p>
-<p>“不知道。我出去买东西时，花店送来的。我不在，所以寄放在邻居家里了。”</p>
-<p>他避开妻子的目光，仔细端详这盆花。细竹支撑着的修长纤弱的茎上开着三朵淡紫色的花。在另一棵茎的顶端，有两个胖乎乎的暗紫色的花蕾。几片干燥厚重的叶子耷拉在盆边上，整棵花赤裸裸地挺立着，上面好像只有花和蕾。</p>
-<p>“上面还附着一张卡片。”</p>
-<p>妻子说着，拿出一张卡片。上面写着：祝贺你的生日。现在我仍然爱你。</p>
-<p>为了不叫妻子发现他脸色的变化，他弯腰面对着鞋。</p>
-<p>“这是谁送来的呢？”</p>
-<p>“……哎呀，我也想不起来。”</p>
-<p>“这就怪了。”</p>
-<p>妻子扔下蹲在那里不起来的丈夫，咚咚咚向厨房走去。</p>
-<p>这个混蛋！丈夫心里骂道，我的苦衷她一点也不理解。一股怒火在他的心里燃烧。</p>
-<p>妻子打开了一瓶莆萄酒，为他祝贺生日。但飞来的那盆花，却使这个夜晚罩上了一层阴影。伺候孩子睡觉后，两个人在起居室里相对而坐，丈夫总是躲开妻子的目光。</p>
-<p>“这样干坐着实在无聊。你好好想想，就一点想不起来？”</p>
-<p>妻子还是穷追不舍。在妻子没完没了的追问下，他哼哼唧唧地说，也许是过去的女友心血来潮送来的生日礼物吧。</p>
-<p>“什么样的女朋友，我怎么没听你说过？”</p>
-<p>妻子突然板起脸来。</p>
-<p>“你别急，不是你所想象的那种关系。”</p>
-<p>“你知道我是怎样想的？”</p>
-<p>看见妻子的眼睛里一下子涌满了泪，丈夫狼狈不堪，手足无措。这下子糟了，我不应该瞒着她。都是那花引起的麻烦，我马上把它扔了。当他满腹懊恼地站起来时，泪流满面的妻子轻轻地说：</p>
-<p>“我不是开玩笑，你，已经不认识我的字了……”</p>
+        <p>随着flink中的状态的持续增长，无论是哪种状态后端，都需要节省空间。类似于redis，flink也提供了对State的过期测策略和清理策略。我们可以设置过期时间，并且支持设置粒度细化到每个状态集合的实体，list中的每个元素和map中每个键值对都可以独立设置过期时间。<br>伴随文章介绍的，还有本人编写的State从入么到高级应用的全部特性demo代码，地址如下：<a href="https://github.com/onyourhead/flink_demo" target="_blank" rel="noopener">https://github.com/onyourhead/flink_demo</a> ，欢迎小伙伴们对照文章和demo来学习flink的状态管理。</p>
+<hr>
+<p>为了使用状态TTL，必须先构建StateTtlConfig配置对象。然后，可以在任何状态描述符中通过传递配置来启用TTL功能。<br>下面给出一段典型示例代码：<br><a id="more"></a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.StateTtlConfig;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.ValueStateDescriptor;</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.time.Time;</span><br><span class="line">StateTtlConfig ttlConfig = StateTtlConfig</span><br><span class="line">    .newBuilder(Time.seconds(<span class="number">1</span>))</span><br><span class="line">    .setUpdateType(StateTtlConfig.UpdateType.OnCreateAndWrite)</span><br><span class="line">    .setStateVisibility(StateTtlConfig.StateVisibility.NeverReturnExpired)</span><br><span class="line">    .build();</span><br><span class="line">    </span><br><span class="line">ValueStateDescriptor&lt;String&gt; stateDescriptor = <span class="keyword">new</span> ValueStateDescriptor&lt;&gt;(<span class="string">"text state"</span>, String.class);</span><br><span class="line">stateDescriptor.enableTimeToLive(ttlConfig);</span><br></pre></td></tr></table></figure></p>
+<p>配置有几个选项需要考虑:</p>
+<p>newBuilder方法的第一个参数是强制性的，它利用建造者模式构造一个待配置的配置主题，其参数是生存时间值。UpdateType在TTL状态刷新时配置(默认情况下是OnCreateAndWrite):</p>
+<ul>
+<li>StateTtlConfig.UpdateType.OnCreateAndWrite-仅在创建和写入。</li>
+<li>StateTtlConfig.UpdateType.OnReadAndWrite-读取时使用。</li>
+</ul>
+<hr>
+<p>StateVisibility配置是否在它没有被清除时依旧能在读取访问时返回过期值，(默认情况下NeverReturnExpired):</p>
+<ul>
+<li>StateTtlConfig.StateVisibility.NeverReturnExpired，过期时间永不返回。</li>
+<li>StateTtlConfig.StateVisibility.ReturnExpiredIfNotCleanedUp，如果可用的话返回。</li>
+</ul>
+<p>在NeverReturnExpired的情况下，过期状态的行为无法再访问，但它仍然必须被删除。<br>该选项对于在TTL之后数据必须严格不可读访问的用例非常有用，例如处理隐私敏感数据的应用程序。</p>
+<h2 id="另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。"><a href="#另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。" class="headerlink" title="另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。"></a>另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。</h2><h1 id="清理过期状态"><a href="#清理过期状态" class="headerlink" title="清理过期状态"></a>清理过期状态</h1><p>默认情况下，状态只在读取时被移除，比如ValueState.value()。</p>
+<h2 id="在全量快照时清除"><a href="#在全量快照时清除" class="headerlink" title="在全量快照时清除"></a>在全量快照时清除</h2><p>你可以在进行状态全量快照时触发清理，这会减小快照的大小。本地状态不会被清理，但是也不会再包含已经移除的过期状态，这样是为了以防需要从之前的快照恢复。此设置不适用于将RocksDB作为状态后端的情况。</p>
+<h2 id="后台清理"><a href="#后台清理" class="headerlink" title="后台清理"></a>后台清理</h2><h3 id="一般用法"><a href="#一般用法" class="headerlink" title="一般用法"></a>一般用法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.StateTtlConfig;</span><br><span class="line">StateTtlConfig ttlConfig = StateTtlConfig</span><br><span class="line">    .newBuilder(Time.seconds(<span class="number">1</span>))</span><br><span class="line">    .cleanupInBackground()</span><br><span class="line">    .build();</span><br><span class="line">```    </span><br><span class="line">上述用法会触发不同状态后端对应的默认后台清理。</span><br><span class="line">### 更细粒度用法</span><br><span class="line">#### 增量清理</span><br><span class="line">适用于内存堆状态后端。触发器可以是一个当每个状态被访问或者每个记录被处理时的回调。如果清理策略是用于激活特定状态的，存储后端保持一个全局的惰性迭代器。每次触发增量清理时迭代器步进一，被遍历的实体被检查，过期的则被清理。</span><br><span class="line">用法如下：</span><br><span class="line">```java</span><br><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.StateTtlConfig;</span><br><span class="line"> StateTtlConfig ttlConfig = StateTtlConfig</span><br><span class="line">    .newBuilder(Time.seconds(<span class="number">1</span>))</span><br><span class="line">    .cleanupIncrementally(<span class="number">10</span>, <span class="keyword">true</span>)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+<p>参数一是每次清理触发时检查的实体个数。如果设置了，每次状态被访问的时候都会触发。第二个参数是否在处理每条记录时额外触发清理。如果此选项开启，对于内存堆上的状态后端，5个实体将被选中，而不用每次记录处理时都清理。</p>
+<p><strong>注意</strong></p>
+<ul>
+<li>如果状态没有发生访问或者没有处理任何记录，则过期状态将持续存在。</li>
+<li>用于增量清理的时间会增加记录处理延迟。</li>
+<li>目前，增量清理仅针对堆状态后端实现。将它设置为RocksDB将没有效果。</li>
+<li>如果堆状态后端与同步快照一起使用，全局迭代器在迭代时保留所有键的副本，因为它的特定实现不支持并发修改。启用此功能将增加内存消耗。异步快照没有这个问题。</li>
+<li>对于现有的作业，这种清理策略可以在StateTtlConfig中随时激活或停用，例如在从保存点重新启动之后。</li>
+</ul>
+<h4 id="RocksDB压缩期间的清理"><a href="#RocksDB压缩期间的清理" class="headerlink" title="RocksDB压缩期间的清理"></a>RocksDB压缩期间的清理</h4><p>如果使用RocksDB状态后端，另一个清理策略是激活Flink特定的压缩过滤器。RocksDB定期运行异步压缩来合并状态更新和减少存储。Flink压缩过滤器使用TTL检查状态项的过期时间戳，并排除过期值。</p>
+<p>此功能在默认情况下是禁用的。它必须首先通过设置Flink配置选项state.backend.RocksDB.ttl.compaction.filter.enabled来激活RocksDB后端，或者通过调用rocksdbstate后端::enableTtlCompactionFilter来激活，如果一个自定义的RocksDB后端是为一个作业创建的。然后，任何带有TTL的状态都可以配置为使用筛选器。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.flink.api.common.state.StateTtlConfig;</span><br><span class="line"></span><br><span class="line">StateTtlConfig ttlConfig = StateTtlConfig</span><br><span class="line">    .newBuilder(Time.seconds(<span class="number">1</span>))</span><br><span class="line">    .cleanupInRocksdbCompactFilter(<span class="number">1000</span>)</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure></p>
+<p>RocksDB压缩过滤器将在每次处理一定数量的状态项后，从Flink查询用于检查过期的当前时间戳。你可以更改它并将自定义值传递给StateTtlConfig.newBuilder(…).cleanupInRocksdbCompactFilter(long queryTimeAfterNumEntries)方法。更频繁地更新时间戳可以提高清理速度，但会降低压缩性能，因为它使用来自本机代码的JNI调用。如果启用默认的后台清理，那么RocksDB后端将激活此策略，并且每次处理1000个条目时将查询当前时间戳。</p>
+<p><strong>注意</strong></p>
+<ul>
+<li>在压缩期间调用TTL过滤器会减慢它的速度。TTL过滤器必须解析最后一次访问的时间戳，并检查每个正在压缩的键的每个存储状态条目的过期时间。对于集合状态类型(列表或映射)，也会对每个存储元素调用检查。</li>
+<li>如果使用这个特性与状态列表元素与非固定字节长度,本机TTL过滤器调用另外一个Flink java类型序列化器元素的JNI每个状态进入,至少第一个元素已经过期的抵消下未到期的元素。</li>
+<li>对于现有的作业，这种清理策略可以在StateTtlConfig中随时激活或停用，例如在从保存点重新启动之后。</li>
+</ul>
 
       
     </div>
@@ -511,6 +524,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/高级/" rel="tag"># 高级</a>
+          
+        </div>
+      
 
       
       
@@ -520,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/26/实习面试锤炼之路/" rel="next" title="实习面试锤炼之路">
-                <i class="fa fa-chevron-left"></i> 实习面试锤炼之路
+              <a href="/2020/01/10/flink高级特性：Broadcast State及demo代码/" rel="next" title="flink高级特性：Broadcast State及demo代码">
+                <i class="fa fa-chevron-left"></i> flink高级特性：Broadcast State及demo代码
               </a>
             
           </div>
@@ -529,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/29/Flink官方培训文档翻译计划（一）/" rel="prev" title="Flink中的流">
-                Flink中的流 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -580,8 +595,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -734,6 +758,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。"><span class="nav-number">1.</span> <span class="nav-text">另一个选项ReturnExpiredIfNotCleanedUp允许在清理之前返回过期状态。这意味着及时状态过期了，无法访问了，但它依然存在于状态后端中，只是没有了指向它的指针。</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#清理过期状态"><span class="nav-number"></span> <span class="nav-text">清理过期状态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在全量快照时清除"><span class="nav-number">1.</span> <span class="nav-text">在全量快照时清除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台清理"><span class="nav-number">2.</span> <span class="nav-text">后台清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一般用法"><span class="nav-number">2.1.</span> <span class="nav-text">一般用法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RocksDB压缩期间的清理"><span class="nav-number">2.1.1.</span> <span class="nav-text">RocksDB压缩期间的清理</span></a></li></ol></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
